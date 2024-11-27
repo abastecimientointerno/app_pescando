@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:app_pescando/providers/pesca_provider.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class ModernResultadosScreen extends StatelessWidget {
   const ModernResultadosScreen({super.key});
@@ -38,7 +39,7 @@ class ModernResultadosScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              // Header
+              // Header with fade and slide animation
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 child: Row(
@@ -59,9 +60,11 @@ class ModernResultadosScreen extends StatelessWidget {
                     SizedBox(width: 48), // Espaciador
                   ],
                 ),
-              ),
+              ).animate()
+                .fadeIn(duration: 300.ms)
+                .slideY(begin: -0.5, end: 0, duration: 300.ms),
 
-              // Circular Progress
+              // Circular Progress with scale and fade animation
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -101,11 +104,13 @@ class ModernResultadosScreen extends StatelessWidget {
                           ],
                         ),
                       ],
-                    ),
+                    ).animate()
+                      .scale(duration: 500.ms, delay: Duration(milliseconds: 500))
+                      .fadeIn(duration: 500.ms),
 
                     SizedBox(height: 32),
 
-                    // Details Cards
+                    // Details Cards with staggered animation
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
@@ -115,17 +120,21 @@ class ModernResultadosScreen extends StatelessWidget {
                             icon: Icons.anchor,
                             title: 'Captura total',
                             value: totalPescaFormatted,
-                          ),
+                          ).animate()
+                            .fadeIn(duration: 300.ms, delay: 300.ms)
+                            .slideX(begin: 0.1, end: 0, duration: 300.ms),
                           SizedBox(height: 16),
                           _buildDetailCard(
                             context: context,
                             icon: Icons.flag,
                             title: 'Cuota de pesca',
                             value: objetivoPescaFormatted,
-                          ),
+                          ).animate()
+                            .fadeIn(duration: 300.ms, delay: 450.ms)
+                            .slideX(begin: 0.1, end: 0, duration: 300.ms),
                           SizedBox(height: 24),
 
-                          // Progress Bar
+                          // Progress Bar with animation
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -159,7 +168,9 @@ class ModernResultadosScreen extends StatelessWidget {
                                 ),
                               ),
                             ],
-                          ),
+                          ).animate()
+                            .fadeIn(duration: 300.ms, delay: 600.ms)
+                            .slideX(begin: 0.1, end: 0, duration: 300.ms),
                         ],
                       ),
                     ),

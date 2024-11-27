@@ -1,13 +1,13 @@
-class Pesca {
-  final String idLocalidad;
-  final int diasDePesca;
+class PescaResponse {
+  final List<dynamic> registros;
+  final String mensaje;
 
-  Pesca({required this.idLocalidad, required this.diasDePesca});
+  PescaResponse({required this.registros, required this.mensaje});
 
-  factory Pesca.fromJson(Map<String, dynamic> json) {
-    return Pesca(
-      idLocalidad: json['id_localidad'],
-      diasDePesca: json['dias_de_pesca'],
+  factory PescaResponse.fromJson(Map<String, dynamic> json) {
+    return PescaResponse(
+      registros: json['str_des'] ?? [],
+      mensaje: json['mensaje'] ?? 'Error',
     );
   }
 }

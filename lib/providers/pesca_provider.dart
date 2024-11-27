@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import '../models/pesca_model.dart';
-import '../services/pesca_service.dart';
+import '../services/api_service.dart';
 
 class PescaProvider with ChangeNotifier {
-  List<Pesca> _pescaData = [];
+  PescaResponse? _pescaResponse;
   bool _isLoading = false;
 
-  List<Pesca> get pescaData => _pescaData;
+  PescaResponse? get pescaResponse => _pescaResponse;
   bool get isLoading => _isLoading;
 
-  final PescaService _pescaService = PescaService();
-
-  Future<void> fetchPesca(String inicio, String fechaFinal) async {
+  Future<void> fetchPesca(String fechaInicio, String fechaFin) async {
     _isLoading = true;
     notifyListeners();
 
     try {
-      _pescaData = await _pescaService.fetchPescaData(inicio, fechaFinal);
+      _pescaResponse = await ApiService.consultarPesca(fechaInicio, fechaFin);
     } catch (e) {
-      print('Error fetching data: $e');
-    } finally {
-      _isLoading = false;
-      notifyListeners();
+      _pescaResponse = PescaResponse(registros: [], mensaje: 'Error: $e');
     }
+
+    _isLoading = false;
+    notifyListeners();
   }
 }

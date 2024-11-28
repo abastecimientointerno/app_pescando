@@ -31,32 +31,32 @@ class _ModernPescaScreenState extends State<ModernPescaScreen> {
             colorScheme: ColorScheme.fromSeed(
               seedColor: Colors.blue,
               primary: Colors.white,
-              surface: Color(0xFF2563EB),
-              background: Color(0xFF1E40AF),
+              surface: const Color(0xFF2563EB),
+              background: const Color(0xFF1E40AF),
             ),
             dialogTheme: DialogTheme(
-              backgroundColor: Color(0xFF2563EB),
-              titleTextStyle: TextStyle(color: Colors.white),
-              contentTextStyle: TextStyle(color: Colors.white),
+              backgroundColor: const Color(0xFF2563EB),
+              titleTextStyle: const TextStyle(color: Colors.white),
+              contentTextStyle: const TextStyle(color: Colors.white),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
             ),
             datePickerTheme: DatePickerThemeData(
-              backgroundColor: Color(0xFF2563EB),
-              headerBackgroundColor: Color(0xFF1E40AF),
+              backgroundColor: const Color(0xFF2563EB),
+              headerBackgroundColor: const Color(0xFF1E40AF),
               headerForegroundColor: Colors.white,
-              dayStyle: TextStyle(color: Colors.white),
-              dayForegroundColor: MaterialStateProperty.resolveWith((states) {
-                if (states.contains(MaterialState.selected)) {
+              dayStyle: const TextStyle(color: Colors.white),
+              dayForegroundColor: WidgetStateProperty.resolveWith((states) {
+                if (states.contains(WidgetState.selected)) {
                   return Colors.white;
                 }
                 return Colors.white70;
               }),
-              yearStyle: TextStyle(color: Colors.white),
+              yearStyle: const TextStyle(color: Colors.white),
               todayBackgroundColor:
-                  MaterialStateProperty.all(Colors.white.withOpacity(0.2)),
-              todayForegroundColor: MaterialStateProperty.all(Colors.white),
+                  WidgetStateProperty.all(Colors.white.withOpacity(0.2)),
+              todayForegroundColor: WidgetStateProperty.all(Colors.white),
               surfaceTintColor: Colors.transparent,
               shadowColor: Colors.transparent,
             ),
@@ -103,13 +103,13 @@ class _ModernPescaScreenState extends State<ModernPescaScreen> {
                 color: Colors.white.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.calendar_today,
                 color: Colors.white,
                 size: 24,
               ),
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,12 +121,12 @@ class _ModernPescaScreenState extends State<ModernPescaScreen> {
                       fontSize: 14,
                     ),
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text(
                     selectedDate != null
                         ? _dateFormatter.format(selectedDate)
                         : 'Seleccionar Fecha',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -147,7 +147,7 @@ class _ModernPescaScreenState extends State<ModernPescaScreen> {
 
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -168,8 +168,8 @@ class _ModernPescaScreenState extends State<ModernPescaScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      SizedBox(height: 24),
-                      Text(
+                      const SizedBox(height: 24),
+                      const Text(
                         'Selecciona el periodo',
                         style: TextStyle(
                           fontSize: 22,
@@ -212,7 +212,7 @@ class _ModernPescaScreenState extends State<ModernPescaScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        ModernResultadosScreen(),
+                                        const ModernResultadosScreen(),
                                   ),
                                 );
                               }
@@ -239,7 +239,7 @@ class _ModernPescaScreenState extends State<ModernPescaScreen> {
                           ),
                           elevation: 0,
                         ),
-                        child: Text(
+                        child: const Text(
                           'Consultar',
                           style: TextStyle(
                             fontSize: 18,
@@ -256,7 +256,7 @@ class _ModernPescaScreenState extends State<ModernPescaScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SpinKitFadingCircle(
+                              const SpinKitFadingCircle(
                                 color: Colors.white,
                                 size: 50.0,
                               ),
@@ -269,17 +269,6 @@ class _ModernPescaScreenState extends State<ModernPescaScreen> {
                                 ),
                               ),
                             ],
-                          ),
-                        )
-                      else if (pescaProvider.pescaResponse != null)
-                        Center(
-                          child: Text(
-                            'Registros: ${pescaProvider.pescaResponse!.registros.length}',
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
                           ),
                         )
                       else

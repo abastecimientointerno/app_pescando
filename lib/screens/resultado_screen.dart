@@ -10,7 +10,10 @@ class ModernResultadosScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pescaProvider = Provider.of<PescaProvider>(context);
-    final registros = pescaProvider.pescaResponse?.registros ?? [];
+    final registros = pescaProvider.pescaResponse?.registros
+        ?.where((registro) => registro['DESC_INPRP'] == 'Propia')
+        .toList() ?? [];
+
 
     double totalPesca = 0;
     for (var registro in registros) {
@@ -26,7 +29,7 @@ class ModernResultadosScreen extends StatelessWidget {
 
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -46,10 +49,10 @@ class ModernResultadosScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      icon: Icon(Icons.chevron_left, color: Colors.white),
+                      icon: const Icon(Icons.chevron_left, color: Colors.white),
                       onPressed: () => Navigator.of(context).pop(),
                     ),
-                    Text(
+                    const Text(
                       'Reporte',
                       style: TextStyle(
                         color: Colors.white,
@@ -57,7 +60,7 @@ class ModernResultadosScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(width: 48), // Espaciador
+                    const SizedBox(width: 48), // Espaciador
                   ],
                 ),
               ).animate()
@@ -88,7 +91,7 @@ class ModernResultadosScreen extends StatelessWidget {
                           children: [
                             Text(
                               '${progreso.toStringAsFixed(1)}%',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 48,
                                 fontWeight: FontWeight.bold,
@@ -105,10 +108,10 @@ class ModernResultadosScreen extends StatelessWidget {
                         ),
                       ],
                     ).animate()
-                      .scale(duration: 500.ms, delay: Duration(milliseconds: 500))
+                      .scale(duration: 500.ms, delay: const Duration(milliseconds: 500))
                       .fadeIn(duration: 500.ms),
 
-                    SizedBox(height: 32),
+                    const SizedBox(height: 32),
 
                     // Details Cards with staggered animation
                     Padding(
@@ -123,7 +126,7 @@ class ModernResultadosScreen extends StatelessWidget {
                           ).animate()
                             .fadeIn(duration: 300.ms, delay: 300.ms)
                             .slideX(begin: 0.1, end: 0, duration: 300.ms),
-                          SizedBox(height: 16),
+                          const SizedBox(height: 16),
                           _buildDetailCard(
                             context: context,
                             icon: Icons.flag,
@@ -132,7 +135,7 @@ class ModernResultadosScreen extends StatelessWidget {
                           ).animate()
                             .fadeIn(duration: 300.ms, delay: 450.ms)
                             .slideX(begin: 0.1, end: 0, duration: 300.ms),
-                          SizedBox(height: 24),
+                          const SizedBox(height: 24),
 
                           // Progress Bar with animation
                           Column(
@@ -157,13 +160,13 @@ class ModernResultadosScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: LinearProgressIndicator(
                                   value: progreso / 100,
                                   backgroundColor: Colors.white.withOpacity(0.3),
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
                                   minHeight: 8,
                                 ),
                               ),
@@ -210,7 +213,7 @@ class ModernResultadosScreen extends StatelessWidget {
               size: 24,
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -222,10 +225,10 @@ class ModernResultadosScreen extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   value,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
